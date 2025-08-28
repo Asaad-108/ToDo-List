@@ -4,13 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.FirebaseApp
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 class SignupActivity : AppCompatActivity() {
+    private lateinit var auth:FirebaseAuth
+    private lateinit var userName:EditText
+    private lateinit var userEmail:EditText
+    private lateinit var userPassword:EditText
+    private lateinit var signUpBtn:Button
+    private lateinit var gotoLogin:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -20,8 +30,38 @@ class SignupActivity : AppCompatActivity() {
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
 //            insets
 //        }
-        val goto_login: TextView =findViewById(R.id.loginText);
-        goto_login.setOnClickListener {
+        auth=FirebaseAuth.getInstance();
+        userName=findViewById(R.id.username)
+        userEmail=findViewById(R.id.useremail)
+        FirebaseApp.initializeApp(this)
+        userPassword=findViewById(R.id.userpassword)
+        signUpBtn=findViewById(R.id.signupbtn)
+        gotoLogin=findViewById(R.id.loginText)
+
+        signUpBtn.setOnClickListener {
+            val name=userName.text.toString().trim()
+            val email=userEmail.text.toString().trim()
+            val password=userPassword.text.toString().trim()
+
+            if(name.isEmpty()||email.isEmpty()||password.isEmpty()){
+                Toast.makeText(this,"Please enter the required credential !",Toast.LENGTH_SHORT).show()
+            }
+            else{
+                auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener{ task ->
+                    if(task.isSuccessful){
+                        val id=auth.currentUser?.uid?:""
+                        val ref=FirebaseDatabase.getInstance().getReference("Users").child(id)
+                        Toast.makeText(this,"Account created successfully !",Toast.LENGTH_SHORT).show()
+                    }
+                    else{
+                        val err = task.exception?.message ?: "Error creating account"
+                        Toast.makeText(this, "$err !", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
+        }
+
+        gotoLogin.setOnClickListener {
             Handler(Looper.getMainLooper()).postDelayed({
                 val i = Intent(this, LoginActivity::class.java);
                 startActivity(i);

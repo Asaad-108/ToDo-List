@@ -8,9 +8,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.delay
 
 class SplashActivity : AppCompatActivity() {
+    private lateinit var auth:FirebaseAuth;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -20,10 +22,13 @@ class SplashActivity : AppCompatActivity() {
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
 //            insets
 //        }
+        auth = FirebaseAuth.getInstance();
+
         Handler(Looper.getMainLooper()).postDelayed({
             val i = Intent(this,LoginActivity::class.java);
             startActivity(i);
             finish();
         },500)
     }
+
 }
