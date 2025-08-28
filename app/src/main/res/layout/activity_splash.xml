@@ -5,31 +5,43 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#CCE9E9"
     tools:context=".SplashActivity">
+
+    <!-- App Icon -->
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/task"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="16dp"
+        android:layout_above="@id/name"
+        android:contentDescription="App Logo" />
+
+    <!-- App Name -->
     <TextView
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ToDo-List"
-        android:textSize="35dp"
+        android:textSize="28sp"
         android:textStyle="bold|italic"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:id="@+id/name"
-        android:layout_margin="10dp"
-        >
-    </TextView>
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/task"
-        android:layout_above="@+id/name"
-        android:layout_centerHorizontal="true">
-    </ImageView>
+        android:textColor="#000"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp" />
+
+    <!-- Loading Indicator -->
     <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/name"
+        android:indeterminate="true"
+        android:layout_below="@id/name"
         android:layout_centerHorizontal="true"
-        >
-    </ProgressBar>
+        android:layout_marginTop="24dp"
+        android:indeterminateTint="#4CAF50" />
+
 </RelativeLayout>

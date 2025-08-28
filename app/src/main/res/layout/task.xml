@@ -1,47 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="#ffffff">
+    android:padding="12dp"
+    android:background="#CCE9E9"
+    android:elevation="4dp">
+
+    <!-- Task Title -->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Task"
-        android:textSize="24dp"
-        android:textStyle="italic|bold"
-        android:layout_margin="10dp"
-        >
-    </TextView>
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="4dp"
+        android:textColor="#000" />
+
+    <!-- Task Description -->
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/desc"
-        android:text="description"
-        android:layout_below="@+id/name"
-        android:textSize="24dp"
-        android:textStyle="italic|bold"
-        android:layout_margin="10dp"
-        >
-    </TextView>
-    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Edit"
-        android:layout_alignParentRight="true"
-        android:layout_margin="10dp"
-        android:id="@+id/edit"
-        >
-    </Button>
-    <Button
+        android:layout_below="@id/name"
+        android:text="Description"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:textColor="#444" />
+
+    <!-- Action Buttons Container -->
+    <LinearLayout
+        android:id="@+id/action_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Delete"
+        android:orientation="horizontal"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="10dp"
-        android:id="@+id/delete"
-        android:layout_below="@+id/edit"
         >
-    </Button>
+        <!-- Edit Button -->
+        <ImageButton
+            android:id="@+id/edit_btn"
+            android:layout_width="45dp"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:contentDescription="Edit Task"
+            android:src="@drawable/edit"
+            app:tint="#2196F3"></ImageButton>
+
+        <!-- Delete Button -->
+        <ImageButton
+            android:id="@+id/delete_btn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="8dp"
+            android:background="@null"
+            android:src="@drawable/delete"
+            android:contentDescription="Delete Task"
+            app:tint="#F44336" >
+        </ImageButton>
+    </LinearLayout>
 </RelativeLayout>
