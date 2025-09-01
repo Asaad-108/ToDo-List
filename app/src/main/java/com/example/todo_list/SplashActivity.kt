@@ -30,13 +30,11 @@ class SplashActivity : AppCompatActivity() {
         ref = FirebaseDatabase.getInstance().getReference("Users");
 
         val current:FirebaseUser?=auth.currentUser
-        if(current!=null){
-            val id=current.uid
-            Handler(Looper.getMainLooper()).postDelayed({
-                val i = Intent(this,MainActivity::class.java);
-                startActivity(i);
-                finish();
-            },500)
+        if(current!=null) {
+            val id = current.uid
+            val i = Intent(this, MainActivity::class.java);
+            startActivity(i);
+            finish();
         }
         else{
             Handler(Looper.getMainLooper()).postDelayed({

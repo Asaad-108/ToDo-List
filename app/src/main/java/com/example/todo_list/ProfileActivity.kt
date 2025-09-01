@@ -8,30 +8,25 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var profileIcon:Button
+class ProfileActivity : AppCompatActivity() {
+    private lateinit var auth:FirebaseAuth
+    private lateinit var logoutBtn:Button
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_profile)
 //        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
 //            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
 //            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
 //            insets
 //        }
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-
-        val tasks = DummyDB.getAllData()
-        recyclerView.adapter = TaskAdapter(tasks)
-
-        profileIcon=findViewById(R.id.profileIcon)
-
-        profileIcon.setOnClickListener(View.OnClickListener {
-            val i = Intent(this,ProfileActivity::class.java)
+        auth=FirebaseAuth.getInstance()
+        logoutBtn=findViewById(R.id.logoutBtn)
+        logoutBtn.setOnClickListener(View.OnClickListener {
+            auth.signOut()
+            val i =Intent(this,LoginActivity::class.java)
             startActivity(i)
             finish()
         })
