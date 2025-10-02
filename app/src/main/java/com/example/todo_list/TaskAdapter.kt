@@ -10,8 +10,8 @@ class TaskAdapter(private val taskList: List<Task>) :
     RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val name = itemView.findViewById<TextView>(R.id.name)
-        val description = itemView.findViewById<TextView>(R.id.desc)
+        val name: TextView = itemView.findViewById(R.id.name)
+        val description: TextView = itemView.findViewById(R.id.desc)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -22,8 +22,10 @@ class TaskAdapter(private val taskList: List<Task>) :
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val task = taskList[position]
-        holder.name.text = task.name
-        holder.description.text = task.desc
+
+        // Use safe call with default values
+        holder.name.text = task.name ?: "No Name"
+        holder.description.text = task.desc ?: "No Description"
     }
 
     override fun getItemCount(): Int = taskList.size
