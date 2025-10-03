@@ -41,7 +41,7 @@
         <!-- Edit Button -->
         <ImageButton
             android:id="@+id/edit_btn"
-            android:layout_width="45dp"
+            android:layout_width="50dp"
             android:layout_height="40dp"
             android:background="@null"
             android:contentDescription="Edit Task"
@@ -51,7 +51,7 @@
         <!-- Delete Button -->
         <ImageButton
             android:id="@+id/delete_btn"
-            android:layout_width="40dp"
+            android:layout_width="50dp"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
             android:background="@null"
